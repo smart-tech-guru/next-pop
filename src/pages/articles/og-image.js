@@ -12,7 +12,7 @@ export async function generateOgImage(props) {
     // `src/pages/articles/og-image.html?${params}`
     `build/articles/og-image.html?${params}`
   )}`;
-  console.log("rr"+url)
+  // console.log("rr ---"+url)
 
   const hash = createHash('md5').update(url).digest('hex');
   const ogImageDir = path.join(process.cwd(), `public/og`);
@@ -39,7 +39,7 @@ export async function generateOgImage(props) {
   const buffer = await page.screenshot();
   await browser.close();
 
-  res.status(200).json({ success: true });
+  // res.status(200).json({ success: true });
 
   fs.mkdirSync(ogImageDir, { recursive: true });
   fs.writeFileSync(imagePath, buffer);
