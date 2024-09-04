@@ -30,6 +30,8 @@ export async function generateOgImage(props) {
   const buffer = await page.screenshot();
   await browser.close();
 
+  res.status(200).json({ success: true });
+
   fs.mkdirSync(ogImageDir, { recursive: true });
   fs.writeFileSync(imagePath, buffer);
 
