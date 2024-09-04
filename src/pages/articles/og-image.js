@@ -24,11 +24,13 @@ export async function generateOgImage(props) {
     // File does not exist, create it
   }
 
+  const executablePath = await chromium.executablePath || puppeteer.executablePath();
+  
   const browser = await puppeteer.launch({
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
+    executablePath,
+    headless: true,
   });
 
   const page = await browser.newPage();
