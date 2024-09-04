@@ -4,6 +4,7 @@ const { createHash } = require('crypto');
 const chromium = require('@sparticuz/chromium');
 const { executablePath } = require('puppeteer');
 const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
@@ -28,11 +29,10 @@ export async function generateOgImage(props) {
   }
 
   const browser = await puppeteer.launch({     
-    args:['--no-sandbox', '--disable-setuid-sandbox'],
-    ignoreDefaultArgs: ['--disable-extensions'],
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
-    executablePath: await executablePath(),
-    headless: true,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });

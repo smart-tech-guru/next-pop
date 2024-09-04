@@ -54,9 +54,8 @@
     "three-stdlib": "^2.18.1"
   },
   "scripts": {
-    "postinstall": "apt-get install -y libnss3 libxss1",
     "dev": "next dev",
-    "build": "apt-get update && apt-get install -y libnss3 libxss1 && next build && next export -o build/",
+    "build": "next build && next export -o build/",
     "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
     "deploy": "aws s3 sync --delete build/ s3://hamish-portfolio-site",
     "deploy:storybook": "aws s3 sync --delete build-storybook s3://hamish-portfolio-storybook",
