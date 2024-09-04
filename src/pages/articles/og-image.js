@@ -28,7 +28,7 @@ export async function generateOgImage(props) {
   }
 
   const browser = await puppeteer.launch({     
-    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    args:['--no-sandbox', '--disable-setuid-sandbox'],
     defaultViewport: chromium.defaultViewport,
     executablePath: await executablePath(),
     headless: true,
