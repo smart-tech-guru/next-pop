@@ -31,7 +31,7 @@ export async function generateOgImage(props) {
     args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
     executablePath: await executablePath(),
-    headless: chromium.headless,
+    headless: false,
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
