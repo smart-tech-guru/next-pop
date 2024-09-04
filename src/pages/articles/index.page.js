@@ -9,6 +9,7 @@ export { Articles as default } from './Articles';
 
 export function getStaticProps() {
   const allPosts = postFilePaths.map(filePath => {
+    try{
     const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
     const { data, content } = matter(source);
 
@@ -20,6 +21,11 @@ export function getStaticProps() {
       timecode,
       slug: filePath.replace(/\.mdx?$/, ''),
     };
+  }
+  catch (error) {
+    console.error('Error fetching data:', error);
+    return null;
+  }
   });
 
   const featured = allPosts.find(post => post.featured);
