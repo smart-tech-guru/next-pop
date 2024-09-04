@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { createHash } = require('crypto');
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const { executablePath } = require('puppeteer');
 const puppeteer = require('puppeteer-core');
 
@@ -28,10 +28,11 @@ export async function generateOgImage(props) {
   }
 
   const browser = await puppeteer.launch({     
-    args:['--no-sandbox', '--disable-setuid-sandbox'],
+    args: chromium.args,
     defaultViewport: chromium.defaultViewport,
-    executablePath: await executablePath(),
-    headless: true,
+    executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
+    ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
