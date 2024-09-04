@@ -1,9 +1,9 @@
 const path = require('path');
 const fs = require('fs');
 const { createHash } = require('crypto');
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const { executablePath } = require('puppeteer');
-const puppeteer = require('puppeteer-extra');
+const puppeteer = require('puppeteer');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
@@ -28,18 +28,14 @@ export async function generateOgImage(props) {
   }
 
   const browser = await puppeteer.launch({     
-    args: ['--no-sandbox',],
-    headless: false,
+    args:['--no-sandbox', '--disable-setuid-sandbox'],
     defaultViewport: chromium.defaultViewport,
     executablePath: await executablePath(),
-    headless: chromium.headless,
-    ignoreHTTPSErrors: true,
+    headless: true,
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
-  await page.goto(url, { 
-    waitUntil: 'networkidle0',
- });
+  await page.goto(url, { waitUntil: 'networkidle0' });
   const buffer = await page.screenshot();
   await browser.close();
 
