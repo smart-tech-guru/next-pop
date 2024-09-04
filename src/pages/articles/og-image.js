@@ -3,7 +3,8 @@ const fs = require('fs');
 const { createHash } = require('crypto');
 const chromium = require('@sparticuz/chromium');
 const { executablePath } = require('puppeteer');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer-core");
 // const chromium = require('chrome-aws-lambda');
 
 export async function generateOgImage(props) {
