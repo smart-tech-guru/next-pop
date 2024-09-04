@@ -1,10 +1,10 @@
 const path = require('path');
 const fs = require('fs');
 const { createHash } = require('crypto');
-// const chromium = require('@sparticuz/chromium');
+const chromium = require('@sparticuz/chromium');
 const { executablePath } = require('puppeteer');
 const puppeteer = require('puppeteer');
-const chromium = require('chrome-aws-lambda');
+// const chromium = require('chrome-aws-lambda');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
@@ -28,9 +28,10 @@ export async function generateOgImage(props) {
     // file does not exists, so we create it
   }
 
-  const browser = await chromium.puppeteer.launch({
+  const browser = await puppeteer.launch({
     args: chromium.args,
-    executablePath: await chromium.executablePath,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath(),
     headless: chromium.headless,
   });
   
