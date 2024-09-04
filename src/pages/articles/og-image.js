@@ -24,8 +24,8 @@ export async function generateOgImage(props) {
     // file does not exists, so we create it
   }
 
-  const browser = await puppeteer.launch({ 
-    args: chromium.args,
+  const browser = await puppeteer.launch({     
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath || '/usr/local/bin/chromium-browser',
     headless: chromium.headless,
