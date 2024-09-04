@@ -28,12 +28,13 @@ export async function generateOgImage(props) {
     // file does not exists, so we create it
   }
 
-  const browser = await puppeteer.launch({     
-    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+  const browser = await puppeteer.launch({
+    args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
-    headless: chromium.headless,
+    executablePath: process.env.NODE_ENV === 'production' ? await chromium.executablePath : puppeteer.executablePath(),
+    headless: true,
   });
+  
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
   await page.goto(url, { waitUntil: 'networkidle0' });
