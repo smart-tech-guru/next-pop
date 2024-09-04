@@ -9,7 +9,7 @@ export async function generateOgImage(props) {
   const url = `file:${path.join(
     process.cwd(),
     //`src/pages/articles/og-image.html?${params}`
-    `articles/og-image.html?${params}`
+    `build/articles/og-image.html?${params}`
   )}`;
 
   const hash = createHash('md5').update(url).digest('hex');
