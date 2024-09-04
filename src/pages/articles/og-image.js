@@ -28,15 +28,18 @@ export async function generateOgImage(props) {
   }
 
   const browser = await puppeteer.launch({     
-    args: chromium.args,
+    args: ['--no-sandbox',],
+    headless: false,
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath,
+    executablePath: await executablePath(),
     headless: chromium.headless,
     ignoreHTTPSErrors: true,
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
-  await page.goto(url, { waitUntil: 'load' });
+  await page.goto(url, { 
+    waitUntil: 'networkidle0',
+ });
   const buffer = await page.screenshot();
   await browser.close();
 
