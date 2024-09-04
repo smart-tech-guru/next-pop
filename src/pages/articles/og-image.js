@@ -3,8 +3,7 @@ const fs = require('fs');
 const { createHash } = require('crypto');
 // const chromium = require('chrome-aws-lambda');
 // const { executablePath } = require('puppeteer');
-// const puppeteer = require('puppeteer-core');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
@@ -29,7 +28,8 @@ export async function generateOgImage(props) {
   }
 
   const browser = await puppeteer.launch({ 
-    headless: false,
+    headless: true, // Try setting to false for more detailed error messages
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
