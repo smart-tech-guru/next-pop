@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { createHash } = require('crypto');
-const chromium = require('@sparticuz/chromium');
+const chromium = require('chrome-aws-lambda');
 const { executablePath } = require('puppeteer');
 const puppeteer = require('puppeteer-core');
 
