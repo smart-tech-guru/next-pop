@@ -401,13 +401,21 @@ export const Articles = ({ posts, featured }) => {
   const checkFunction = (item) => {
     return (String(item.title).toLowerCase().includes(searchText.value) || String(item.abstract).toLowerCase().includes(searchText.value));
   };
-
+  const filteredPosts = posts.filter(checkFunction);
   const postList = (
     <div className={styles.list}>
       {!isSingleColumn && postsHeader}
-      {posts.filter(checkFunction).map(({ slug, ...post }, index) => (
+      {
+  <>
+    {filteredPosts.length > 0 ? (
+      filteredPosts.map(({ slug, ...post }, index) => (
         <ArticlesPost key={slug} slug={slug} index={index} {...post} />
-      ))}
+      ))
+    ) : (
+      <p>No articles available at the moment.</p>  // Fallback message
+    )}
+  </>
+}
       {searchText.value == '' && Array(6)
         .fill()
         .map((skeleton, index) => (
