@@ -1,9 +1,9 @@
 const path = require('path');
 const fs = require('fs');
 const { createHash } = require('crypto');
-// const chromium = require('chrome-aws-lambda');
-// const { executablePath } = require('puppeteer');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
+const { executablePath } = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
@@ -27,9 +27,11 @@ export async function generateOgImage(props) {
     // file does not exists, so we create it
   }
 
-  const browser = await puppeteer.launch({ 
-    headless: true, // Try setting to false for more detailed error messages
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  const browser = await puppeteer.launch({     
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await executablePath(),
+    headless: true,
   });
   const page = await browser.newPage();
   await page.setViewport({ width: 1200, height: 630 });
