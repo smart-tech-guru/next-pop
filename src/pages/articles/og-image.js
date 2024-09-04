@@ -12,7 +12,7 @@ export async function generateOgImage(props) {
     // `src/pages/articles/og-image.html?${params}`
     `build/articles/og-image.html?${params}`
   )}`;
-  // console.log("rr ---"+url)
+  //  nconsole.log("rr ---"+url)
 
   const hash = createHash('md5').update(url).digest('hex');
   const ogImageDir = path.join(process.cwd(), `public/og`);
