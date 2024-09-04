@@ -54,6 +54,7 @@
     "three-stdlib": "^2.18.1"
   },
   "scripts": {
+    "postinstall": "apt-get install -y libnss3 libxss1",
     "dev": "next dev",
     "build": "next build && next export -o build/",
     "build:storybook": "build-storybook -o build-storybook && node scripts/draco-storybook",
