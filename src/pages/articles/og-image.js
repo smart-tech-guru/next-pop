@@ -1,5 +1,6 @@
 const chromium = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer-core');
+const path = require('path');
 
 export async function generateOgImage(props) {
   const params = new URLSearchParams(props);
