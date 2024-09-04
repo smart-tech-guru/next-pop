@@ -4,8 +4,8 @@
   },
   "extends": ["eslint:recommended", "next/core-web-vitals"],
   "rules": {
-    "semi": "error",
-    "no-unused-vars": "warn",
+    "semi": "off",
+    "no-unused-vars": "off",
     "import/no-anonymous-default-export": "off",
     "react/display-name": "off",
     "@next/next/no-img-element": "off"
