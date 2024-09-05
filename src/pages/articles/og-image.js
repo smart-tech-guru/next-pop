@@ -27,7 +27,7 @@ export async function generateOgImage(props) {
   }
 
   // const executablePath = await chromium.executablePath || puppeteer.executablePath();
-  console.log("exe-path --------", executablePath)
+  // console.log("exe-path --------", executablePath)
   const browser = await puppeteer.launch({
       args: [
           "--no-sandbox",
