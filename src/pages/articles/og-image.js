@@ -1,7 +1,7 @@
 const path = require('path');
 const { createHash } = require('crypto');
 const fs = require('fs');
-// const chromium = require('chrome-aws-lambda');
+const chromium = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
@@ -26,7 +26,7 @@ export async function generateOgImage(props) {
     // File does not exist, create it
   }
 
-  // const executablePath = await chromium.executablePath || puppeteer.executablePath();
+  const executablePath = await chromium.executablePath || puppeteer.executablePath();
   // console.log("exe-path --------", executablePath)
   const browser = await puppeteer.launch({
       args: [
@@ -34,6 +34,7 @@ export async function generateOgImage(props) {
           "--disable-setuid-sandbox",
           "--window-size=1920,1080"
       ],
+      executablePath,
       headless: true
   });
 
