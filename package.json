@@ -46,6 +46,7 @@
     "playwright": "^1.46.1",
     "puppeteer-core": "^23.2.2",
     "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-toastify": "^9.1.3",
